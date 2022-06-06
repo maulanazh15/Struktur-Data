@@ -22,45 +22,55 @@ void enqueue(int identitas, Queue *q) {
     } else {
         q->kamar[q->rear] = identitas;
         q->rear = (q->rear + 1) % MAXQUEUE;
-        q->count++;
+        (q->count)++;
     }
 }
 
 void dequeue(Queue *q) {
     if (q->count == 0) {
-        cout << "Kamar kosong" << endl;
+        cout << "Mohon maaf Kamar kosong" << endl;
     } else {
+        int datanya; 
+        datanya = q->kamar[q->front];
         q->front = (q->front + 1) % MAXQUEUE;
-        q->count--;
+        (q->count)--;
+        cout << "Orang dengan nomor identitas : " << datanya << " telah keluar dari kamar." << endl;
     }
 }
 
-void cetak(Queue *q) {
-    int i;
-    if (q->count == 0) {
-        cout << "Kamar kosong" << endl;
-    } else {
-        for (i = 0; i < q->count; i++) {
-            cout << q->kamar[(q->front + i) % MAXQUEUE] << endl;
-        }
-    }
-}
+
 
 int main() {
     Queue antrian;
     initQueue(&antrian);
-    int identitas = 1;
-    for (int i = 0; i < 6; i++)
-    {
-        enqueue(identitas, &antrian);
-        // if (identitas%5==0)
-        // {
-        //     dequeue(&antrian);
-        //     enqueue(identitas, &antrian);
-        // }
-        identitas++;
+    int pilihan;
+    while (pilihan != 4) {
+        cout << "1. Masukkan antrian" << endl;
+        cout << "2. Keluar antrian" << endl;
+        cout << "3. Keluar" << endl;
+        cout << "Pilihan : ";
+        cin >> pilihan;
+        switch (pilihan) {
+            case 1:
+                int identitas;
+                cout << "Masukkan nomor identitas : ";
+                cin >> identitas;
+                enqueue(identitas, &antrian);
+                break;
+            case 2:
+                dequeue(&antrian);
+                break;
+            case 3:
+                cout<<"Terima kasih telah menggunakan antrian kami"<<endl;
+                break;
+            default:
+                cout << "Pilihan tidak ada" << endl;
+                break;
+        }
     }
-    cetak(&antrian);
+    return 0;
+    
+    
     
 }
 
