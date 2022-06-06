@@ -68,7 +68,7 @@ int main()
         case 1:
             cout << "Nomor identitas anda : " << identitas << endl;
             enqueue(identitas, &antrian);
-            if (antrian.count <= 4)
+            if (antrian.count != 5)
             {
                 identitas++;
             }
