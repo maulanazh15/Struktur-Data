@@ -2,35 +2,44 @@
 #define MAXQUEUE 5
 using namespace std;
 
-typedef struct {
+typedef struct
+{
     int count;
     int front;
     int rear;
     int kamar[MAXQUEUE];
 } Queue;
 
-void initQueue(Queue *q) {
+void initQueue(Queue *q)
+{
     q->count = 0;
     q->front = 0;
     q->rear = 0;
 }
 
-
-void enqueue(int identitas, Queue *q) {
-    if (q->count == MAXQUEUE) {
+void enqueue(int identitas, Queue *q)
+{
+    if (q->count == MAXQUEUE)
+    {
         cout << "Kamar penuh" << endl;
-    } else {
+    }
+    else
+    {
         q->kamar[q->rear] = identitas;
         q->rear = (q->rear + 1) % MAXQUEUE;
         (q->count)++;
     }
 }
 
-void dequeue(Queue *q) {
-    if (q->count == 0) {
-        cout << "Mohon maaf Kamar kosong" << endl;
-    } else {
-        int datanya; 
+void dequeue(Queue *q)
+{
+    if (q->count == 0)
+    {
+        cout << "Mohon maaf kamar telah dikosongkan." << endl;
+    }
+    else
+    {
+        int datanya;
         datanya = q->kamar[q->front];
         q->front = (q->front + 1) % MAXQUEUE;
         (q->count)--;
@@ -38,42 +47,45 @@ void dequeue(Queue *q) {
     }
 }
 
-
-
-int main() {
+int main()
+{
     Queue antrian;
     initQueue(&antrian);
     int pilihan;
-    while (pilihan != 4) {
-        cout << "1. Masukkan antrian" << endl;
-        cout << "2. Keluar antrian" << endl;
-        cout << "3. Keluar" << endl;
+    int identitas = 1;
+
+    while (pilihan != 3)
+    {
+        cout << "Selamat Datang di Wahana Wisata Dasar Laut Plankton Inc" << endl;
+        cout << "Pilih menu yang ingin anda lakukan : " << endl;
+        cout << "1. Masuk ke kamar pandang." << endl;
+        cout << "2. Keluar dari kamar pandang." << endl;
+        cout << "3. Keluar dari wahana." << endl;
         cout << "Pilihan : ";
         cin >> pilihan;
-        switch (pilihan) {
-            case 1:
-                int identitas;
-                cout << "Masukkan nomor identitas : ";
-                cin >> identitas;
-                enqueue(identitas, &antrian);
-                break;
-            case 2:
-                dequeue(&antrian);
-                break;
-            case 3:
-                cout<<"Terima kasih telah menggunakan antrian kami"<<endl;
-                break;
-            default:
-                cout << "Pilihan tidak ada" << endl;
-                break;
+        switch (pilihan)
+        {
+        case 1:
+            cout << "Nomor identitas anda : " << identitas << endl;
+            enqueue(identitas, &antrian);
+            if (antrian.count <= 4)
+            {
+                identitas++;
+            }
+            system("pause");
+            break;
+        case 2:
+            dequeue(&antrian);
+            system("pause");
+            break;
+        case 3:
+            cout << "Terima kasih telah berkunjung ke wahana kami." << endl;
+            break;
+        default:
+            cout << "Pilihan tidak ada" << endl;
+            break;
         }
+        system("cls");
     }
     return 0;
-    
-    
-    
 }
-
-
-
-
