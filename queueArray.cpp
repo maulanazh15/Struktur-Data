@@ -80,6 +80,7 @@ int main()
             break;
         case 3:
             cout << "Terima kasih telah berkunjung ke wahana kami." << endl;
+            system("pause");
             break;
         default:
             cout << "Pilihan tidak ada" << endl;
